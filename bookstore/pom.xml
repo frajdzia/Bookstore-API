@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- define maven model version -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- project coordinates -->
+    <groupId>api.bookstore</groupId>
+    <artifactId>bookstore</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!-- package as a WAR file -->
+    <packaging>war</packaging>
+
+    <!-- project properties -->
+    <properties>
+        <!-- set java source version -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <!-- set java target version -->
+        <maven.compiler.target>17</maven.compiler.target>
+        <!-- set encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- define dependencies -->
+    <dependencies>
+        <!-- add jakarta REST (JAX-RS) API -->
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <!-- add jersey servlet container -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+
+        <!-- add jersey HK2 dependency injection -->
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+
+        <!-- add jackson support for JSON -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+
+        <!-- add SLF4J logging API -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+        <!-- add SLF4J simple implementation -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+        <!-- add jakarta servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <!-- provided scope since server provides it -->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- configure build settings -->
+    <build>
+        <!-- define plugins -->
+        <plugins>
+            <!-- add java compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <!-- configure java version -->
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+
+            <!-- add WAR packager plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+            </plugin>
+
+            <!-- add jetty plugin for development -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>11.0.24</version>
+                <!-- configure jetty settings -->
+                <configuration>
+                    <!-- set scan interval -->
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <!-- configure web app -->
+                    <webApp>
+                        <!-- set context path -->
+                        <contextPath>/</contextPath>
+                    </webApp>
+                    <!-- configure HTTP connector -->
+                    <httpConnector>
+                        <!-- set port -->
+                        <port>8081</port>
+                    </httpConnector>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

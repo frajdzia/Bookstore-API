@@ -1,0 +1,7 @@
+package api.exception;
+// invalid input exception
+public class InvalidInputException extends RuntimeException {
+    public InvalidInputException(String message) {
+        super(message);
+    }
+}
